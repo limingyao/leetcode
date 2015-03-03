@@ -10,6 +10,10 @@ public:
             ret = ret*10 + x%10;
             x/=10;
         }
+        //添加了溢出判断
+        if(flag*ret<INT_MIN||flag*ret>INT_MAX){
+            return 0;
+        }
         return flag*ret;
     }
 };
