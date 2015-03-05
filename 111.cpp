@@ -26,3 +26,5 @@ public:
         return min(leftHeight,rightHeight) + 1;
     }
 };
+
+// However, in some cases where the tree is oddly unbalanced, BFS works much faster than DFS.

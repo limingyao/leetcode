@@ -42,3 +42,7 @@ public:
         return ans;
     }
 };
+
+// 可以用类似于102中的方法解决
+// vector<vector<int> > (ans.rbegin(), ans.rend())
+// std::reverse(ans.begin(), ans.end()); 
