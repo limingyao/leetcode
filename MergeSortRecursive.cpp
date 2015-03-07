@@ -33,7 +33,7 @@ void MergePass(int data[], int tmp[], int length, int start, int end){
 }
 
 void MergeSort(int data[], int n){
-    if(data==NULL){
+    if(data==NULL||n==0){
         return;
     }
     int *tmp = new int[n];
