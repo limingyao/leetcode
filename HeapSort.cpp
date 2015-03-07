@@ -14,9 +14,10 @@ void adjust(int data[], int n, int root){
         if(data[i]<data[i+1]){
             ++i;
         }
-        if(data[root]<data[i]){
-            Swap(&data[i],&data[root]);
+        if(data[root]>=data[i]){
+            break;
         }
+        Swap(&data[i],&data[root]);
         root = i;
         i*=2;
     }
