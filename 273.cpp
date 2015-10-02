@@ -39,3 +39,57 @@ private:
 };
 const char* const Solution::less_twenty[] =  {"One", "Two", "Three", "Four","Five","Six","Seven","Eight","Nine","Ten", "Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"};
 const char* const Solution::less_hundred[] = {"Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+
+
+// Method 2:
+class Solution {
+public:
+    string numberToWords(int num) {
+        int i = 0;
+        string word;
+        while(num) {
+            int n = num % 1000;
+            num /= 1000;
+            string ret = helper(n);
+            if(ret.size()>0){
+                if(i>0){
+                    word = ret + " " + unit[i] + (word.size() ? " " + word : word);
+                }else{
+                    word = ret;
+                }
+            }
+            ++i;
+        }
+        return word.size() ? word : "Zero";
+    }
+private:
+    static const char* const less_twenty[];
+    static const char* const less_hundred[];
+    static const char* const unit[];
+
+    string helper(int num) {
+        string word = "";
+        if(num == 0){
+            return word;
+        }
+        if(num/100!=0) {
+            word = word + less_twenty[num/100] + " " + unit[0];
+            num %= 100;
+        }
+        if(num>=20) {
+            word = word.size() ? word + " " : word;
+            word += less_hundred[num/10];
+            num %= 10;
+        }
+        if(num > 0) {
+            word = word.size() ? word + " " : word;
+            word += less_twenty[num];
+        }
+        return word;
+    }
+};
+
+const char* const Solution::less_twenty[] =  {"", "One", "Two", "Three", "Four","Five","Six","Seven","Eight","Nine","Ten", "Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"};
+const char* const Solution::less_hundred[] = {"", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+const char* const Solution::unit[] = {"Hundred", "Thousand", "Million", "Billion", "Triliion"};
+
