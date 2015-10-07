@@ -32,3 +32,28 @@ public:
         return NULL;
     }
 };
+
+// Method 2:
+// 充分利用sbt输的性质
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        while(root!=NULL && ((root -> val - p -> val) * (root -> val - q -> val) > 0)) {
+            if(p -> val < root -> val) {
+                root = root -> left;
+            } else {
+                root = root -> right;
+            }
+        }
+        return root;
+    }
+};
