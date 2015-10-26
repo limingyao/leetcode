@@ -1,0 +1,53 @@
+// 一个能将给定非负整数数组中的数字排列成最大数字的函数
+
+//  编写一个能将给定非负整数数组中的数字排列成最大数字的函数。
+//  例如，给定[50,2,1,9]，最大数字为95021。
+public class Sort {
+     
+    public static void main(String args[]){
+        int number[] = {1,2,3,32,335,34,7,6,9};
+        int number1[] = {312,321,3354,222,8};
+        System.out.println(SortMax(number));
+        System.out.println(SortMax(number1));
+    }
+     
+    public static String SortMax(int num[]){
+        int number[] = new int[num.length];
+        for (int i = 0; i < num.length; i++) {
+            number[i] = num[i];
+        }
+        int max = 0;
+        int min = 0;
+        StringBuffer s = new StringBuffer();
+        for (int i = 0; i < number.length; i++) {
+            for (int j = i + 1; j < number.length; j++) {
+                Integer x = number[i];
+                Integer y = number[j];
+                int tempX = Integer.parseInt(x.toString() + "" + y.toString());
+                int tempY = Integer.parseInt(y.toString() + "" + x.toString());
+                //关键点，转为String类型拼接起来，再转回int类型进行比较
+                if(tempX > tempY){
+                    max = x;
+                    min = y;
+                }
+                else{
+                    max = y;
+                    min = x;
+                }
+                number[i] = max;
+                number[j] = min;
+            }
+        }
+        for (int i = 0; i < number.length; i++) {
+            s.append(number[i]);
+        }
+        return s.toString();
+    }
+}
+
+/*Output:
+9763433533221
+83354321312222
+*/
+
+//:输出String类型
