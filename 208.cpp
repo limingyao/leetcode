@@ -23,7 +23,7 @@ public:
     void insert(string word) {
         size_t len = word.size();
         TrieNode* p = root;
-        for(int i=0; i< len; i++) {
+        for(size_t i=0; i< len; i++) {
             if(p -> next[word[i] - 'a'] == NULL) {
                 p -> next[word[i] - 'a'] = new TrieNode();
             }
@@ -51,13 +51,8 @@ public:
 private:
     TrieNode* root;
     TrieNode* find(TrieNode* root, string word) {
-        size_t len = word.size();
-        for(int i=0; i< len; i++) {
-            if(root -> next[word[i] - 'a'] != NULL) {
-                root = root -> next[word[i] - 'a'];
-            } else {
-                return NULL;
-            }
+        for(size_t i=0; i< word.size() && root != NULL; i++) {
+            root = root -> next[word[i] - 'a'];
         }
         return root;
     }
