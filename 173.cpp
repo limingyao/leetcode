@@ -12,13 +12,15 @@
 class BSTIterator {
 private:
     stack<TreeNode *> s;
+    void push_left_all(TreeNode *root) {
+        while(root != NULL) {
+            s.push(root);
+            root = root -> left;
+        }
+    }
 public:
     BSTIterator(TreeNode *root) {
-        TreeNode *p = root;
-        while(p != NULL) {
-            s.push(p);
-            p = p->left;
-        }
+        push_left_all(root);
     }
 
     /** @return whether we have a next smallest number */
@@ -31,15 +33,8 @@ public:
         if(!hasNext()) return NULL;
         TreeNode *p = s.top();
         s.pop();
-        int ret = p -> val;
-        if(p -> right != NULL) {
-            p = p -> right;
-            while(p != NULL) {
-                s.push(p);
-                p = p->left;
-            }
-        }
-        return ret;
+        push_left_all(p -> right);
+        return p -> val;
     }
 };
 
