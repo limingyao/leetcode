@@ -26,6 +26,7 @@ public:
 
     // Returns the next element in the iteration without advancing the iterator.
 	int peek() {
+        // Iterator(*this) makes a copy of current iterator, then call next on the copied iterator to get the next value without affecting current iterator.
         return Iterator(*this).next();
 	}
 
